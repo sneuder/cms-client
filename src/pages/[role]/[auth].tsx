@@ -1,11 +1,12 @@
-import Form from '@/components/form';
+import CredentialsForm from '@/components/credentialsForm';
 import credentialsGenerator from '@/services/credentials';
 
 const Auth = ({ role, auth }) => {
   const service = credentialsGenerator(role, auth);
 
   return (
-    <Form
+    <CredentialsForm
+      role={role}
       auth={auth}
       service={service}
     />
