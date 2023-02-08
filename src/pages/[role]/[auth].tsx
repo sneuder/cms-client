@@ -1,15 +1,21 @@
+import ContainerCredentials from '@/common/layouts/containerCredentials';
 import CredentialsForm from '@/components/credentialsForm';
+import Cover from '@/components/cover';
+
 import credentialsGenerator from '@/services/credentials';
 
 const Auth = ({ role, auth }) => {
   const service = credentialsGenerator(role, auth);
 
   return (
-    <CredentialsForm
-      role={role}
-      auth={auth}
-      service={service}
-    />
+    <ContainerCredentials>
+      <Cover />
+      <CredentialsForm
+        role={role}
+        auth={auth}
+        service={service}
+      />
+    </ContainerCredentials>
   );
 };
 

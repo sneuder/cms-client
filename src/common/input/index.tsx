@@ -1,10 +1,13 @@
+import { TextField } from '@mui/material';
+
 const Input = ({ type, name, placeholder, onChange }) => {
   return (
-    <input
+    <TextField
       type={type}
       name={name}
       placeholder={placeholder}
       onChange={onChange}
+      variant="outlined"
     />
   );
 };
