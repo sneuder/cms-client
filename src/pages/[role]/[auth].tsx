@@ -1,4 +1,4 @@
-import ContainerCredentials from '@/common/layouts/containerCredentials';
+import { ContainerCredentials, ContainerForm } from './elements';
 import CredentialsForm from '@/components/credentialsForm';
 import Cover from '@/components/cover';
 
@@ -10,11 +10,13 @@ const Auth = ({ role, auth }) => {
   return (
     <ContainerCredentials>
       <Cover />
-      <CredentialsForm
-        role={role}
-        auth={auth}
-        service={service}
-      />
+      <ContainerForm>
+        <CredentialsForm
+          role={role}
+          auth={auth}
+          service={service}
+        />
+      </ContainerForm>
     </ContainerCredentials>
   );
 };

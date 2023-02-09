@@ -1,7 +1,7 @@
 import { FC } from 'react';
 
 import { Button } from '@mui/material';
-import { ContainerForm } from './elements';
+import { ContainerForm, Form, DoubleInputs } from './elements';
 import Input from '@/common/input';
 
 import inputCredentials from '@/constants/inputCrendentials';
@@ -11,7 +11,7 @@ const CredentialsForm: FC<any> = ({ role, auth, service }) => {
   const { handleFormSubmit, handleInputChange } = useForm(service);
 
   return (
-    <form onSubmit={handleFormSubmit}>
+    <Form onSubmit={handleFormSubmit}>
       <ContainerForm>
         {role === 'admin' && auth === 'signup' && (
           <Input
@@ -21,7 +21,7 @@ const CredentialsForm: FC<any> = ({ role, auth, service }) => {
         )}
 
         {role === 'employee' && auth === 'signup' && (
-          <>
+          <DoubleInputs>
             <Input
               {...inputCredentials.frName}
               onChange={handleInputChange}
@@ -30,7 +30,7 @@ const CredentialsForm: FC<any> = ({ role, auth, service }) => {
               {...inputCredentials.lsName}
               onChange={handleInputChange}
             />
-          </>
+          </DoubleInputs>
         )}
 
         <Input
@@ -52,12 +52,11 @@ const CredentialsForm: FC<any> = ({ role, auth, service }) => {
         <Button
           type="submit"
           variant="contained"
-          size="large"
         >
-          Sign in
+          {auth === 'signin' ? 'Sign In' : 'Sign Up'}
         </Button>
       </ContainerForm>
-    </form>
+    </Form>
   );
 };
 

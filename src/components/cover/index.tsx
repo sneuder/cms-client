@@ -1,5 +1,7 @@
+import { Container } from './elements';
+
 const Cover = () => {
-  return <div></div>;
+  return <Container />;
 };
 
 export default Cover;
