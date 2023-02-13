@@ -1,6 +1,9 @@
 import { createTheme } from '@mui/material/styles';
 
 const theme = createTheme({
+  shape: {
+    borderRadius: 8,
+  },
   components: {
     MuiButton: {
       variants: [
@@ -8,15 +11,24 @@ const theme = createTheme({
           props: { variant: 'contained' },
           style: {
             textTransform: 'inherit',
-            padding: '0rem',
+            height: '3rem',
           },
         },
       ],
     },
     MuiTextField: {
+      variants: [
+        {
+          props: { variant: 'outlined' },
+          style: {
+            borderRadius: '2rem',
+            padding: '0rem',
+          },
+        },
+      ],
       styleOverrides: {
         root: {
-          borderRadius: '90px',
+          borderRadius: '2rem',
         },
       },
     },
