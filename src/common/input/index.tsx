@@ -1,8 +1,8 @@
-import { TextField } from '@mui/material';
+import { BaseInput } from './elements';
 
 const Input = ({ type, name, placeholder, onChange }) => {
   return (
-    <TextField
+    <BaseInput
       type={type}
       name={name}
       placeholder={placeholder}

@@ -6,9 +6,19 @@ const theme = createTheme({
       variants: [
         {
           props: { variant: 'contained' },
-          style: {},
+          style: {
+            textTransform: 'inherit',
+            padding: '0rem',
+          },
         },
       ],
+    },
+    MuiTextField: {
+      styleOverrides: {
+        root: {
+          borderRadius: '90px',
+        },
+      },
     },
   },
 });
