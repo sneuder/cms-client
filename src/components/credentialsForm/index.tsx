@@ -1,3 +1,4 @@
+import Link from 'next/link';
 import { FC } from 'react';
 
 import { Button } from '@mui/material';
@@ -55,6 +56,12 @@ const CredentialsForm: FC<any> = ({ role, auth, service }) => {
         >
           {auth === 'signin' ? 'Sign In' : 'Sign Up'}
         </Button>
+
+        {auth === 'signup' ? (
+          <Link href={`/${role}/signin`}>Already have an account?</Link>
+        ) : (
+          <Link href={`/${role}/signup`}>Don&#39;t have an account?</Link>
+        )}
       </ContainerForm>
     </Form>
   );
