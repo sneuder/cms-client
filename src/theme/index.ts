@@ -32,6 +32,20 @@ const theme = createTheme({
         },
       },
     },
+    MuiCheckbox: {
+      styleOverrides: {
+        root: {
+          padding: '0rem',
+        },
+      },
+    },
+    MuiFormControlLabel: {
+      styleOverrides: {
+        root: {
+          margin: '0rem',
+        },
+      },
+    },
   },
 });
 

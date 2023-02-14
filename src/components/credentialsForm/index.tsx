@@ -1,7 +1,7 @@
 import Link from 'next/link';
 import { FC } from 'react';
 
-import { Button } from '@mui/material';
+import { Button, Checkbox, FormControlLabel } from '@mui/material';
 import { ContainerForm, Form, DoubleInputs } from './elements';
 import Input from '@/common/input';
 
@@ -49,6 +49,11 @@ const CredentialsForm: FC<any> = ({ role, auth, service }) => {
             onChange={handleInputChange}
           />
         )}
+
+        <FormControlLabel
+          control={<Checkbox />}
+          label="Remember me"
+        />
 
         <Button
           type="submit"
