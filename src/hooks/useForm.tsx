@@ -1,10 +1,15 @@
 import { useState } from 'react';
+import Credentials from '@/interfaces/Crendentials';
 
-const useForm = (service): any => {
-  const [formInfo, setFormInfo] = useState({});
+const useForm = (service: any): any => {
+  const [formInfo, setFormInfo] = useState<Credentials>({} as Credentials);
 
   const handleFormSubmit = (e: any) => {
     e.preventDefault();
+
+    if (!formInfo.coPassword && formInfo.coPassword !== formInfo.password)
+      return;
+
     service(formInfo)
       .then((data: any) => console.log(data))
       .catch((e: any) => console.log(e));
