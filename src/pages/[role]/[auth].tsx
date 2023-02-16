@@ -1,10 +1,15 @@
+import { FC } from 'react';
+
+import { StaticRoleAuth } from '@/interfaces/StaticPaths';
+import { Role, Auth } from '@/interfaces/Crendentials';
+
 import { ContainerCredentials, ContainerForm } from './elements';
 import CredentialsForm from '@/components/credentialsForm';
 import Cover from '@/components/cover';
 
 import credentialsGenerator from '@/services/credentials';
 
-const Auth = ({ role, auth }) => {
+const Auth: FC<{ role: Role; auth: Auth }> = ({ role, auth }) => {
   const service = credentialsGenerator(role, auth);
 
   return (
@@ -22,18 +27,20 @@ const Auth = ({ role, auth }) => {
 };
 
 export async function getStaticPaths() {
+  const roles: Role[] = ['admin', 'employee'];
+  const auths: Auth[] = ['signup', 'signin'];
+
+  const paths: StaticRoleAuth[] = auths.flatMap((auth) =>
+    roles.map((role) => ({ params: { auth, role } }))
+  );
+
   return {
-    paths: [
-      { params: { auth: 'signin', role: 'admin' } },
-      { params: { auth: 'signup', role: 'admin' } },
-      { params: { auth: 'signin', role: 'employee' } },
-      { params: { auth: 'signup', role: 'employee' } },
-    ],
+    paths,
     fallback: false, // can also be true or 'blocking'
   };
 }
 
-export async function getStaticProps({ params }) {
+export async function getStaticProps({ params }: StaticRoleAuth) {
   return {
     props: params,
   };
