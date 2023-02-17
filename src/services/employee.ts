@@ -12,3 +12,13 @@ export const getAllEmployees = (token: string) => {
     },
   });
 };
+
+export const getOneEmployee = (token: string, employeeId: string) => {
+  return axios({
+    method: 'GET',
+    url: `/employee/${employeeId}`,
+    headers: {
+      Authorization: token,
+    },
+  });
+};

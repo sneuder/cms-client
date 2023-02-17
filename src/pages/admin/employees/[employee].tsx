@@ -2,7 +2,7 @@ import { FC } from 'react';
 
 import { getAllEmployees } from '@/services/employee';
 
-const Auth: FC<any> = () => {
+const Employee: FC<any> = () => {
   return <p>Esneider</p>;
 };
 
@@ -15,4 +15,4 @@ export async function getServerSideProps() {
   };
 }
 
-export default Auth;
+export default Employee;
