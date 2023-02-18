@@ -8,7 +8,7 @@ export const getAllEmployees = (token: string) => {
     method: 'GET',
     url: '/employees',
     headers: {
-      Authorization: `${token}`,
+      Authorization: token,
     },
   });
 };
