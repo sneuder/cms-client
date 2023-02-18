@@ -1,19 +1,19 @@
 import { FC } from 'react';
 import { getAllEmployees } from '@/services/employee';
 
-const Employees: FC<any> = () => {
+const Employees: FC<any> = ({ employees }) => {
+  console.log(employees);
   return <p>Esneider</p>;
 };
 
-export async function getServerSideProps() {
-  // TODO the fetch to get employee info
-
-  // const employees = await getAllEmployees(
-  //   'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYzZDZlZjU3YTZmNDkzYTRiYTNlNGNmYSIsImVtYWlsIjoiZXNuZWlkZXJAZ21haWwuY29tIiwiaWF0IjoxNjc1MDMxMjUyfQ.LLBUZlfkwjUN-tN6ETIKRss9y1Da883R_KXFDCG3hf0'
-  // );
+export async function getServerSideProps(context: any) {
+  const sessionToken = context.req.cookies.token;
+  const { data } = await getAllEmployees(sessionToken);
 
   return {
-    props: {},
+    props: {
+      employees: data,
+    },
   };
 }
 
