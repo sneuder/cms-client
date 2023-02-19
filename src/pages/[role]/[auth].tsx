@@ -1,8 +1,7 @@
 import { FC } from 'react';
 
-import { StaticRoleAuth } from '@/interfaces/StaticPaths';
 import { Role, Auth } from '@/interfaces/Crendentials';
-
+import { GetServerSidePropsContext } from 'next';
 import { ContainerCredentials, ContainerForm } from './elements';
 import CredentialsForm from '@/components/credentialsForm';
 import Cover from '@/components/cover';
@@ -26,23 +25,34 @@ const Auth: FC<{ role: Role; auth: Auth }> = ({ role, auth }) => {
   );
 };
 
-export async function getStaticPaths() {
-  const roles: Role[] = ['admin', 'employee'];
-  const auths: Auth[] = ['signup', 'signin'];
+export async function getServerSideProps(context: GetServerSidePropsContext) {
+  const rolesCollection: Role[] = ['admin', 'employee'];
+  const authsCollection: Auth[] = ['signup', 'signin'];
 
-  const paths: StaticRoleAuth[] = auths.flatMap((auth) =>
-    roles.map((role) => ({ params: { auth, role } }))
-  );
+  const sessionToken = context.req.cookies.token;
+  const { role, auth } = context.query;
+
+  if (sessionToken)
+    return {
+      redirect: {
+        destination: '/',
+        permanent: false,
+      },
+    };
+
+  if (rolesCollection.includes(role) && authsCollection.includes(auth))
+    return {
+      props: {
+        role: role,
+        auth: auth,
+      },
+    };
 
   return {
-    paths,
-    fallback: false, // can also be true or 'blocking'
-  };
-}
-
-export async function getStaticProps({ params }: StaticRoleAuth) {
-  return {
-    props: params,
+    redirect: {
+      destination: '/error',
+      permanent: false,
+    },
   };
 }
 
