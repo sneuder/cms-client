@@ -36,7 +36,7 @@ export async function getServerSideProps(context: GetServerSidePropsContext) {
   if (sessionToken)
     return {
       redirect: {
-        destination: '/',
+        destination: '/cms',
         permanent: false,
       },
     };

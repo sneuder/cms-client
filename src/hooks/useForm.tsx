@@ -1,9 +1,11 @@
 import { useState } from 'react';
+import { useRouter } from 'next/router';
 import Credentials from '@/interfaces/Crendentials';
 import { saveSessionToken } from '@/services/sessionToke';
 
 const useForm = (service: any): any => {
   const [formInfo, setFormInfo] = useState<Credentials>({} as Credentials);
+  const router = useRouter();
 
   const handleFormSubmit = (e: any) => {
     e.preventDefault();
@@ -12,7 +14,10 @@ const useForm = (service: any): any => {
     //   return;
 
     service(formInfo)
-      .then((data: any) => saveSessionToken(data.headers.authorization))
+      .then((data: any) => {
+        saveSessionToken(data.headers.authorization);
+        router.push('/cms');
+      })
       .catch((e: any) => console.log(e));
   };
 
