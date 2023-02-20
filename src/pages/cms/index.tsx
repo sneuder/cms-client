@@ -1,22 +1,17 @@
+import withSession from '@/services/withSession';
+
 const CMS = () => {
   return <>es</>;
 };
 
-export async function getServerSideProps(context: any) {
-  const sessionToken = context.req.cookies.token;
-
-  if (sessionToken) {
+export const getServerSideProps = async (context) => {
+  function serverSideProps() {
     return {
       props: {},
     };
   }
 
-  return {
-    redirect: {
-      destination: '/admin/signin',
-      permanent: false,
-    },
-  };
-}
+  return withSession(context, serverSideProps);
+};
 
 export default CMS;
