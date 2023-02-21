@@ -1,8 +1,9 @@
-import { IncomingMessage, ServerResponse } from 'http';
-import { GetServerSidePropsContext } from 'next';
+import { NextApiRequest, NextApiResponse } from 'next';
 import { ParsedUrlQuery } from 'querystring';
 
-interface Context extends GetServerSidePropsContext {
+interface Context {
+  req: NextApiRequest;
+  res: NextApiResponse;
   params: ParsedUrlQuery;
 }
 

@@ -1,4 +1,5 @@
 import { FC } from 'react';
+import Context from '@/interfaces/Context';
 
 import { getAllEmployees } from '@/services/employee';
 import withSession from '@/services/withSession';
@@ -7,9 +8,9 @@ const Employees: FC<any> = ({ employees }) => {
   return <p>Esneider</p>;
 };
 
-export async function getServerSideProps(context: any) {
+export async function getServerSideProps({ req }: Context) {
   async function serverSideProps() {
-    const sessionToken = context.req.cookies.token;
+    const sessionToken = req.cookies.token as string;
     const { data } = await getAllEmployees(sessionToken);
 
     return {
@@ -19,7 +20,7 @@ export async function getServerSideProps(context: any) {
     };
   }
 
-  return withSession(context, serverSideProps);
+  return withSession(req, serverSideProps);
 }
 
 export default Employees;

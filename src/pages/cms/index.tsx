@@ -1,17 +1,18 @@
+import Context from '@/interfaces/Context';
 import withSession from '@/services/withSession';
 
 const CMS = () => {
   return <>es</>;
 };
 
-export async function getServerSideProps(context) {
+export async function getServerSideProps({ req }: Context) {
   function serverSideProps() {
     return {
       props: {},
     };
   }
 
-  return withSession(context, serverSideProps);
+  return withSession(req, serverSideProps);
 }
 
 export default CMS;

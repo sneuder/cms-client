@@ -1,4 +1,6 @@
-const withSession = (request, getServerSidePropsFunc) => {
+import { NextApiRequest } from 'next';
+
+const withSession = (request: NextApiRequest, getServerSidePropsFunc) => {
   const sessionToken = request.cookies.token;
 
   if (!sessionToken) {
