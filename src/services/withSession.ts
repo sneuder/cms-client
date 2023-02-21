@@ -18,7 +18,11 @@ const withSession = (contextProps: Context, getServerSidePropsFunc) => {
     };
   }
 
-  if (!sessionToken) {
+  if (
+    !rolesCollection.includes(role) &&
+    !authsCollection.includes(auth) &&
+    !sessionToken
+  ) {
     return {
       redirect: {
         destination: '/admin/signin',
