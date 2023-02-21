@@ -4,7 +4,7 @@ const CMS = () => {
   return <>es</>;
 };
 
-export const getServerSideProps = async (context) => {
+export async function getServerSideProps(context) {
   function serverSideProps() {
     return {
       props: {},
@@ -12,6 +12,6 @@ export const getServerSideProps = async (context) => {
   }
 
   return withSession(context, serverSideProps);
-};
+}
 
 export default CMS;

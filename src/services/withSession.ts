@@ -1,5 +1,5 @@
-const withSession = (contextProps, getServerSidePropsFunc) => {
-  const sessionToken = contextProps.req.cookies.token;
+const withSession = (request, getServerSidePropsFunc) => {
+  const sessionToken = request.cookies.token;
 
   if (!sessionToken) {
     return {

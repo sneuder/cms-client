@@ -1,20 +1,25 @@
 import { FC } from 'react';
+
 import { getAllEmployees } from '@/services/employee';
+import withSession from '@/services/withSession';
 
 const Employees: FC<any> = ({ employees }) => {
-  console.log(employees);
   return <p>Esneider</p>;
 };
 
 export async function getServerSideProps(context: any) {
-  const sessionToken = context.req.cookies.token;
-  const { data } = await getAllEmployees(sessionToken);
+  async function serverSideProps() {
+    const sessionToken = context.req.cookies.token;
+    const { data } = await getAllEmployees(sessionToken);
 
-  return {
-    props: {
-      employees: data,
-    },
-  };
+    return {
+      props: {
+        employees: data,
+      },
+    };
+  }
+
+  return withSession(context, serverSideProps);
 }
 
 export default Employees;
