@@ -1,7 +1,7 @@
 import { FC } from 'react';
 
 import { Role, Auth } from '@/interfaces/Crendentials';
-import { GetServerSidePropsContext } from 'next';
+import Context from '@/interfaces/Context';
 
 import { ContainerCredentials, ContainerForm } from './elements';
 import CredentialsForm from '@/components/credentialsForm';
@@ -26,7 +26,7 @@ const Auth: FC<{ role: Role; auth: Auth }> = ({ role, auth }) => {
   );
 };
 
-export async function getServerSideProps(context: GetServerSidePropsContext) {
+export async function getServerSideProps(context: Context) {
   const rolesCollection: Role[] = ['admin', 'employee'];
   const authsCollection: Auth[] = ['signup', 'signin'];
 

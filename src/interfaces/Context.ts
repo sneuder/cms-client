@@ -5,6 +5,9 @@ interface Context {
   req: NextApiRequest;
   res: NextApiResponse;
   params: ParsedUrlQuery;
+  query: {
+    [key: string]: string;
+  };
 }
 
 export default Context;

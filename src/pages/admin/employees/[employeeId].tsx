@@ -8,10 +8,10 @@ const Employee: FC<any> = ({ employee }) => {
   return <p>Esneider</p>;
 };
 
-export async function getServerSideProps({ req, params }: Context) {
+export async function getServerSideProps(context: Context) {
   async function serverSideProps() {
-    const sessionToken = req.cookies.token as string;
-    const employeeId = params.employeeId as string;
+    const sessionToken = context.req.cookies.token as string;
+    const employeeId = context.params.employeeId as string;
 
     const { data } = await getOneEmployee(sessionToken, employeeId);
 
@@ -22,7 +22,7 @@ export async function getServerSideProps({ req, params }: Context) {
     };
   }
 
-  return withSession(req, serverSideProps);
+  return withSession(context, serverSideProps);
 }
 
 export default Employee;

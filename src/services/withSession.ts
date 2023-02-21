@@ -1,7 +1,7 @@
-import { NextApiRequest } from 'next';
+import Context from '@/interfaces/Context';
 
-const withSession = (request: NextApiRequest, getServerSidePropsFunc) => {
-  const sessionToken = request.cookies.token;
+const withSession = (contextProps: Context, getServerSidePropsFunc) => {
+  const sessionToken = contextProps.req.cookies.token;
 
   if (!sessionToken) {
     return {
