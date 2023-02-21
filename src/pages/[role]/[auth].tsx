@@ -7,7 +7,9 @@ import { ContainerCredentials, ContainerForm } from './elements';
 import CredentialsForm from '@/components/credentialsForm';
 import Cover from '@/components/cover';
 
+import { rolesCollection, authsCollection } from '@/constants/webPaths';
 import credentialsGenerator from '@/services/credentials';
+import withSession from '@/services/withSession';
 
 const Auth: FC<{ role: Role; auth: Auth }> = ({ role, auth }) => {
   const service = credentialsGenerator(role, auth);
@@ -27,34 +29,19 @@ const Auth: FC<{ role: Role; auth: Auth }> = ({ role, auth }) => {
 };
 
 export async function getServerSideProps(context: Context) {
-  const rolesCollection: Role[] = ['admin', 'employee'];
-  const authsCollection: Auth[] = ['signup', 'signin'];
+  async function serverSideProps() {
+    const { role, auth } = context.query;
 
-  const sessionToken = context.req.cookies.token;
-  const { role, auth } = context.query;
+    if (rolesCollection.includes(role) && authsCollection.includes(auth))
+      return {
+        props: {
+          role: role,
+          auth: auth,
+        },
+      };
+  }
 
-  if (sessionToken)
-    return {
-      redirect: {
-        destination: '/cms',
-        permanent: false,
-      },
-    };
-
-  if (rolesCollection.includes(role) && authsCollection.includes(auth))
-    return {
-      props: {
-        role: role,
-        auth: auth,
-      },
-    };
-
-  return {
-    redirect: {
-      destination: '/error',
-      permanent: false,
-    },
-  };
+  return withSession(context, serverSideProps);
 }
 
 export default Auth;

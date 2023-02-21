@@ -1,7 +1,5 @@
 import Context from '@/interfaces/Context';
-
-const rolesCollection = ['admin', 'employee'];
-const authsCollection = ['signup', 'signin'];
+import { rolesCollection, authsCollection } from '@/constants/webPaths';
 
 const withSession = (contextProps: Context, getServerSidePropsFunc) => {
   const sessionToken = contextProps.req.cookies.token;
