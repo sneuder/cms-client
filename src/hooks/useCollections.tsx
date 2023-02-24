@@ -9,7 +9,9 @@ const useCollections = () => {
       .catch((e) => console.log(e));
   };
 
-  return { handleAllCollections };
+  const handleOneCollection = () => {};
+
+  return { handleAllCollections, handleOneCollection };
 };
 
 export default useCollections;
