@@ -6,9 +6,10 @@ axios.defaults.baseURL = baseUrl;
 export const getAllCollections = (token: string) => {
   return axios({
     method: 'GET',
-    url: '/sites/63bd7e23bfbced0b8e63db10/collections',
+    url: '/sites',
     headers: {
       Authorization: token,
+      'api-id-key': '63d6f27890c3d78d93bff237',
     },
   });
 };
